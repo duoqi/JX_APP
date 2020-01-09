@@ -538,7 +538,7 @@
                     android:id="@+id/tv_five"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500"
+                    android:text="600"
                     android:textColor="#666666"
                     android:textSize="12sp" />
 
@@ -617,7 +617,7 @@
                     android:id="@+id/tv_six"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="600"
+                    android:text="800"
                     android:textColor="#666666"
                     android:textSize="12sp" />
 

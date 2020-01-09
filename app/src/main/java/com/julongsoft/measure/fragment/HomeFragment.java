@@ -139,24 +139,24 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         Print.e(TAG, some[i]);
                     }
 
-                    if( i == 0){
-                        tv_one.setText(response.body().getContent().get(0).getNum());
-                    }
-                    if( i == 1){
-                        tv_two.setText(response.body().getContent().get(1).getNum());
-                    }
-                    if( i == 2){
-                        tv_three.setText(response.body().getContent().get(2).getNum());
-                    }
-                    if( i == 3){
-                        tv_four.setText(response.body().getContent().get(3).getNum());
-                    }
-                    if( i == 4){
-                        tv_five.setText(response.body().getContent().get(4).getNum());
-                    }
-                    if( i == 5){
-                        tv_six.setText(response.body().getContent().get(5).getNum());
-                    }
+//                    if( i == 0){
+//                        tv_one.setText(response.body().getContent().get(0).getNum());
+//                    }
+//                    if( i == 1){
+//                        tv_two.setText(response.body().getContent().get(1).getNum());
+//                    }
+//                    if( i == 2){
+//                        tv_three.setText(response.body().getContent().get(2).getNum());
+//                    }
+//                    if( i == 3){
+//                        tv_four.setText(response.body().getContent().get(3).getNum());
+//                    }
+//                    if( i == 4){
+//                        tv_five.setText(response.body().getContent().get(4).getNum());
+//                    }
+//                    if( i == 5){
+//                        tv_six.setText(response.body().getContent().get(5).getNum());
+//                    }
 
                 }
 
