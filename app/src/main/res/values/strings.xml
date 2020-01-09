@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">延崇项目管理</string>
+    <string name="wait_me">待我审核</string>
+    <string name="finish_me">已审核</string>
+    <string name="home">首页</string>
+    <string name="work">工作</string>
+    <string name="about">关于</string>
+
+
+    <string-array name="check_menu">
+        <item>计量支付</item>
+        <item>工程变更</item>
+    </string-array>
+
+
+    <string-array name="repulse_menu">
+        <item>驻地计量、合同工程师</item>
+        <item>总监办计量、合同监理工程师</item>
+        <item>项目工程师</item>
+        <item>计划科专业工程师</item>
+    </string-array>
+
+</resources>

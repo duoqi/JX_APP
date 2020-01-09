@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:text="驻地计量、合同工程师"
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"/>
+
+    <View
+        android:layout_gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/colorWrite"/>
+
+</LinearLayout>

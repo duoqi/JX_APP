@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#62b2ef</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="red">#FF0000</color>
+    <color name="colorTitle">#439ee4</color>
+    <color name="colorWrite">#ffffff</color>
+    <color name="colorLogin_no_click">#cccccc</color>
+    <color name="colorText">#666666</color>
+    <color name="colorWorkBackground">#e0e0e0</color>
+    <color name="workState">#b3b3b3</color>
+    <color name="workStateRight">#0eaf06</color>
+    <color name="buttonDetial">#e5e5e5</color>
+    <color name="textDetial">#333333</color>
+</resources>

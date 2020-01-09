@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_dialog_wait_audit_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/shape_dialog_title"
+        android:gravity="center"
+        android:text="提示"
+        android:textColor="@color/colorWrite"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:gravity="center"
+        android:text="确定审核通过？"
+        android:textColor="#333333"
+        android:textSize="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancle"
+            android:background="@color/colorWrite"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#999999"
+            android:textSize="18sp"
+            android:text="确定"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#e0e0e0"/>
+        <Button
+            android:id="@+id/btn_right"
+            android:background="@color/colorWrite"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#999999"
+            android:textSize="18sp"
+            android:text="取消"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</LinearLayout>

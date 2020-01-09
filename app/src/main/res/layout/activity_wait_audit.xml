@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.julongsoft.measure.view.NavigationBar
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="44dp" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWrite"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_pass"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_exit_login"
+            android:text="通过"
+            android:textColor="#e0e0e0"
+            android:textSize="15sp" />
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="#e0e0e0" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/btn_pass"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginLeft="45dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@drawable/shape_exit_login"-->
+        <!--android:text="通过"-->
+        <!--android:textColor="#e0e0e0"-->
+        <!--android:textSize="15sp" />-->
+
+
+        <!--<Button-->
+        <!--android:id="@+id/btn_repulse"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginRight="45dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@drawable/shape_exit_login"-->
+        <!--android:text="打回"-->
+        <!--android:textColor="#e0e0e0"-->
+        <!--android:textSize="15sp" />-->
+
+    </RelativeLayout>
+
+    <com.julongsoft.measure.view.MyScrollView
+        android:id="@+id/msv_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_layout"
+        android:layout_below="@id/navigationBar"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWrite"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+
+                        android:id="@+id/iv_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/gz_dwsh_jlxx_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/iv_image"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="10dp"
+                        android:text="计量信息"
+                        android:textColor="#333333"
+                        android:textSize="17sp" />
+
+
+                    <ImageView
+                        android:id="@+id/tv_image1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/gz_dwsh_in" />
+
+                    <TextView
+                        android:id="@+id/tv_detial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/tv_image1"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="10dp"
+                        android:text="查看详情"
+                        android:textColor="#b3b3b3"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e0e0e0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/iv_image"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="30dp"
+                        android:paddingTop="11dp"
+                        android:text="单位名称："
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_unit_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="3dp"
+                        android:text="中铁十一局"
+                        android:textColor="#666666"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/iv_image"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="30dp"
+                        android:paddingTop="3dp"
+                        android:text="合同金额（万元）："
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_hetong_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="3dp"
+                        android:text="0"
+                        android:textColor="#666666"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/iv_image"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="30dp"
+                        android:paddingTop="3dp"
+                        android:text="上期末累计支付（万元）："
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_last_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="3dp"
+                        android:text="0"
+                        android:textColor="#666666"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/iv_image"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="30dp"
+                        android:paddingTop="3dp"
+                        android:text="本期支付（万元）："
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_this_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="3dp"
+                        android:text="0"
+                        android:textColor="#666666"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="11dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/iv_image"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="30dp"
+                        android:paddingTop="3dp"
+                        android:text="本期末累计支付（万元）："
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_this_totle_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="3dp"
+                        android:text="0"
+                        android:textColor="#666666"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_layout"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorWrite"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+
+                        android:id="@+id/iv_image2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/gz_dwsh_shzt_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/iv_image2"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="10dp"
+                        android:text="审核状态"
+                        android:textColor="#333333"
+                        android:textSize="17sp" />
+
+
+                    <ImageView
+                        android:id="@+id/tv_image3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/gz_dwsh_in"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/tv_image3"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="10dp"
+                        android:text="审核过程"
+                        android:textColor="#b3b3b3"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e0e0e0" />
+
+                <com.julongsoft.measure.view.NoScrollListView
+                    android:id="@+id/no_scroll_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:divider="@null"
+                    android:scrollbars="none" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.julongsoft.measure.view.MyScrollView>
+
+
+</RelativeLayout>
