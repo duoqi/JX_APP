@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="延崇项目管理"
+            android:text="京雄项目管理"
             android:textColor="@color/colorWrite"
             android:textSize="21sp" />
     </LinearLayout>

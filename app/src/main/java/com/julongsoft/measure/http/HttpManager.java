@@ -3,6 +3,7 @@ package com.julongsoft.measure.http;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -35,8 +36,8 @@ public class HttpManager {
     private HttpManager() {
 
 
-//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         //手动创建一个OkHttpClient并设置超时时间等设置
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -46,6 +47,7 @@ public class HttpManager {
 
         //设置重连
         builder.retryOnConnectionFailure(true);
+        builder.addInterceptor(loggingInterceptor);
 
         /*创建retrofit对象*/
         Retrofit retrofit = new Retrofit.Builder()

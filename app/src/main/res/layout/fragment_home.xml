@@ -221,6 +221,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_one"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="100"
@@ -300,6 +301,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_two"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="200"
@@ -377,6 +379,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_three"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="300"
@@ -454,6 +457,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_four"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="400"
@@ -531,6 +535,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_five"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="500"
@@ -609,6 +614,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_six"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="600"

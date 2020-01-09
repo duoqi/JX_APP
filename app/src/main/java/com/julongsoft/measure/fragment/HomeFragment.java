@@ -48,6 +48,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private DbUser user;
     private LinearLayout ll_picture;
     private ProgressBar tv_ipicture_text;
+    private TextView tv_one;
+    private TextView tv_two;
+    private TextView tv_three;
+    private TextView tv_four;
+    private TextView tv_five;
+    private TextView tv_six;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,7 +83,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         tv_wait_me.setOnClickListener(this);
 
         NavigationBar navigationBar = (NavigationBar) view.findViewById(R.id.navigationBar);
-        navigationBar.setTitle("延庆至崇礼高速公路河北段");
+        navigationBar.setTitle("京雄高速公路河北段\n     工程项目管理");
         navigationBar.clearLeftViews();
         navigationBar.clearRightViews();
 
@@ -106,6 +112,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         tv_bottom4 = (TextView) view.findViewById(R.id.tv_bottom4);
         tv_bottom5 = (TextView) view.findViewById(R.id.tv_bottom5);
         tv_bottom6 = (TextView) view.findViewById(R.id.tv_bottom6);
+        tv_one = (TextView) view.findViewById(R.id.tv_one);
+        tv_two = (TextView) view.findViewById(R.id.tv_two);
+        tv_three = (TextView) view.findViewById(R.id.tv_three);
+        tv_four = (TextView) view.findViewById(R.id.tv_four);
+        tv_five = (TextView) view.findViewById(R.id.tv_five);
+        tv_six = (TextView) view.findViewById(R.id.tv_six);
 
 
         getDataFromServer();
@@ -125,6 +137,25 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
                         Print.e(TAG, totle[i]);
                         Print.e(TAG, some[i]);
+                    }
+
+                    if( i == 0){
+                        tv_one.setText(response.body().getContent().get(0).getNum());
+                    }
+                    if( i == 1){
+                        tv_two.setText(response.body().getContent().get(1).getNum());
+                    }
+                    if( i == 2){
+                        tv_three.setText(response.body().getContent().get(2).getNum());
+                    }
+                    if( i == 3){
+                        tv_four.setText(response.body().getContent().get(3).getNum());
+                    }
+                    if( i == 4){
+                        tv_five.setText(response.body().getContent().get(4).getNum());
+                    }
+                    if( i == 5){
+                        tv_six.setText(response.body().getContent().get(5).getNum());
                     }
 
                 }
