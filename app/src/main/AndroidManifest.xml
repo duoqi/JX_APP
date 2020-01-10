@@ -30,9 +30,9 @@
     <application
         android:name=".global.GlobalApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/luncher"
+        android:icon="@mipmap/launcher_two"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/luncher"
+        android:roundIcon="@mipmap/launcher_two"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
