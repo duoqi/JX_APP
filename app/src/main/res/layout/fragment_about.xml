@@ -191,7 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingLeft="5dp"
-            android:text="西安巨龙软件信息技术有限公司"
+            android:text="西安能芯智慧交通信息技术有限公司"
             android:textColor="#666666"
             android:textSize="16sp" />
 
