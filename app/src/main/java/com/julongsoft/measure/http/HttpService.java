@@ -22,7 +22,8 @@ public interface HttpService {
     /*基础url*/
 //      public static final String baseUrl = "http://192.168.7.150:8082/plat/";
 //    public static final String baseUrl = "http://60.8.218.156:7000/plat/"; //正式
-    public static final String baseUrl = "http://60.8.218.156:7001/plat_xa_app/"; //正式
+//    public static final String baseUrl = "http://60.8.218.156:7001/plat_xa_app/"; //正式
+    public static final String baseUrl = "http://27.128.206.151:7001/plat_xa_app/"; //正式
 //    public static final String baseUrl = "http://192.168.7.104:8083/plat/"; //测试
 //    public static final String baseUrl = "http://60.8.218.142:8089/plat/"; //测试
 
