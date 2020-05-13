@@ -12,6 +12,7 @@ import com.julongsoft.measure.R;
 import com.julongsoft.measure.fragment.AboutFragment;
 import com.julongsoft.measure.fragment.BaseFragment;
 import com.julongsoft.measure.fragment.HomeFragment;
+import com.julongsoft.measure.fragment.MoneyFragment;
 import com.julongsoft.measure.fragment.WorkFragment;
 import com.julongsoft.measure.view.TabGroupLayout;
 
@@ -50,11 +51,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         _fragmentList.add(homeFragment);
         WorkFragment waitFragment = new WorkFragment();
         _fragmentList.add(waitFragment);
+        MoneyFragment moneyFragment = new MoneyFragment();
+        _fragmentList.add(moneyFragment);
         AboutFragment aboutFragment = new AboutFragment();
         _fragmentList.add(aboutFragment);
         _viewPager = (ViewPager) findViewById(R.id.viewpager);
         //设置缓存view 的个数（实际有3个，缓存2个+正在显示的1个）
-        _viewPager.setOffscreenPageLimit(2);
+        _viewPager.setOffscreenPageLimit(3);
 
         _vRedPoint = findViewById(R.id.v_red_wait_point);
 

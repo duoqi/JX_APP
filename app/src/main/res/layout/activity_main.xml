@@ -104,6 +104,46 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/main_tab4_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_weight="1.0">
+
+            <FrameLayout
+                android:id="@+id/main_tab4_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/selector_main_work" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:background="@drawable/small_red_point"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/main_tab4_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_tab4_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:text="资金"
+                android:textColor="@drawable/selector_text_main"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/main_tab3_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
