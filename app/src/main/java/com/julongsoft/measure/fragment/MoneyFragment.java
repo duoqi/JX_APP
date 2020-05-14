@@ -21,11 +21,11 @@ import android.widget.TextView;
 
 import com.julongsoft.measure.R;
 import com.julongsoft.measure.activity.MainActivity;
-import com.julongsoft.measure.activity.WaitAuditActivity;
+import com.julongsoft.measure.activity.MoneyDetialActivity;
 import com.julongsoft.measure.db.GreenDaoHelper;
 import com.julongsoft.measure.entity.DbSegments;
 import com.julongsoft.measure.entity.DbUser;
-import com.julongsoft.measure.entity.PeriodListData;
+import com.julongsoft.measure.entity.MoneyData;
 import com.julongsoft.measure.entity.ProjectTimeData;
 import com.julongsoft.measure.entity.SectionData;
 import com.julongsoft.measure.http.BaseResultData;
@@ -35,9 +35,14 @@ import com.julongsoft.measure.utils.Print;
 import com.julongsoft.measure.view.NavigationBar;
 import com.julongsoft.measure.view.PopupWindowWork;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Response;
 
 import static com.julongsoft.measure.R.id.tv_title;
@@ -49,7 +54,7 @@ import static com.julongsoft.measure.R.id.tv_title;
 public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnClickItemListener, View.OnClickListener {
 
 
-    private static final String TAG = "WorkFragment";
+    private static final String TAG = "MoneyFragment";
     private MainActivity mActivity;
     private View rightView;
     private ImageView ivRight;
@@ -64,7 +69,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
     private View gray_layout;
     private PopupWindow popupWindow;
 
-//    int fromYDelta;
+    //    int fromYDelta;
     private View view_line_one;
     private View view_line_two;
     private View view_line_three;
@@ -87,6 +92,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
     private String[] sectionValue = {"1标", "2标", "3标", "4标", "5标", "6标", "7标", "8标"};
     private String selectSection = "";
     private Long sectionId = 0L;//选择标段id
+    private String sectionName = null;//选择标段id
     private String selectProject = "";
     private SectionAdapter mAdapter;
     private ProjectTimeAdapter timeAdapter;
@@ -102,10 +108,11 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
     private boolean isNextPageData = true;
 
 
-    private List<PeriodListData.ListBean> periodListDatas = new ArrayList<>();
+    private List<MoneyData> moneyDatas = new ArrayList<>();
 
 
     private String sectionState = null; //工期状态(1.未审核，2待我审核，3已审核)
+    private Integer state; //工期状态(0待我审核，1已审核)
     private String segmentId = null; //标段Id
     private String num = null; //工期号
 
@@ -135,7 +142,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
 
     private void initViews(View view) {
         navigationBar = (NavigationBar) view.findViewById(R.id.navigationBar);
-        navigationBar.setTitle("工作");
+        navigationBar.setTitle("资金");
         navigationBar.hideLeftViews();
 //        navigationBar.clearRightViews();
 //        rightView = View.inflate(mActivity, R.layout.work_menu, null);
@@ -157,16 +164,16 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
 
         View footerView = View.inflate(mActivity, R.layout.item_add_footer_view, null);
         tvFooter = (TextView) footerView.findViewById(R.id.tv_footer);
-        lv_data_list.addFooterView(footerView,null,false);
+        lv_data_list.addFooterView(footerView, null, false);
 
 
         lv_data_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PeriodListData.ListBean period = periodListDatas.get(position);
-                Intent intent = new Intent(mActivity, WaitAuditActivity.class);
-                intent.putExtra("periodId", period.getId());
-                Print.e("periodId",period.getId());
+                MoneyData moneyData = moneyDatas.get(position);
+                Intent intent = new Intent(mActivity, MoneyDetialActivity.class);
+                intent.putExtra("note", moneyData.getNote());
+                Print.e("note",moneyData.getNote());
                 startActivity(intent);
             }
         });
@@ -203,42 +210,42 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
         }
 
 
-        lv_data_list.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                switch (scrollState) {
-                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:// 停止的状态
-                        int lastVisiblePosition = lv_data_list.getLastVisiblePosition();
-                        if (null != periodListDatas) {
-                            if (lastVisiblePosition == periodListDatas.size()) {
+//        lv_data_list.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//                switch (scrollState) {
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:// 停止的状态
+//                        int lastVisiblePosition = lv_data_list.getLastVisiblePosition();
+//                        if (null != moneyDatas) {
+//                            if (lastVisiblePosition == moneyDatas.size()) {
+//
+//                                if (isNextPageData) {
+//                                    getDataFromServer(sectionName, state);
+//                                } else {
+//                                    tvFooter.setText("没有更多数据");
+//                                }
+//
+//
+//                            }
+//                        }
+//
+//
+//                        break;
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+//                        break;
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//
+//            }
+//        });
 
-                                if (isNextPageData) {
-                                    getDataFromServer(++page, segmentId, num, sectionState);
-                                } else {
-                                    tvFooter.setText("没有更多数据");
-                                }
 
-
-                            }
-                        }
-
-
-                        break;
-                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-                        break;
-                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
-                        break;
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-            }
-        });
-
-
-        getDataFromServer(1, null, null, null);
+        getDataFromServer(sectionName, state);
     }
 
 
@@ -246,33 +253,40 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
      * peroid peroid
      * 标段Id segmentId
      * 工期id id
-     * @param page
      */
 
-    public void getDataFromServer(final int page, String segmentId, String num, String state) {
-
-
-        HttpManager.getInstance().getHttpService().getWorkListData(user.getToken(), page, segmentId, num, state).enqueue(new HttpResultCallback<BaseResultData<PeriodListData>>() {
+    public void getDataFromServer(String segmentName, Integer state) {
+        String json = null;
+        try {
+            json = new JSONObject().put("segmentName", segmentName).put("state", state).toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
+        HttpManager.getInstance().getHttpService().getMoneyListData(user.getToken(), body).enqueue(new HttpResultCallback<BaseResultData<List<MoneyData>>>() {
             @Override
-            public void onSuc(Response<BaseResultData<PeriodListData>> response) {
+            public void onSuc(Response<BaseResultData<List<MoneyData>>> response) {
 
 
-                if (response.body().getContent().getPageNo() < response.body().getContent().getTotalPage()) {
-                    isNextPageData = true;
-                } else {
-                    isNextPageData = false;
+//                if (response.body().getContent().getPageNo() < response.body().getContent().getTotalPage()) {
+//                    isNextPageData = true;
+//                } else {
+//                    isNextPageData = false;
+//                }
+//
+//                if (page == 1) {
+                if (response.body().code == 0) {
+                    moneyDatas = response.body().getContent();
+                    lv_data_list.setAdapter(new WorkDataAdapter(moneyDatas));
                 }
 
-                if (page == 1) {
-                    periodListDatas = response.body().getContent().getList();
-                        workDataAdapter = new WorkDataAdapter(periodListDatas);
-
-                    Print.e(TAG+ "_____________________",periodListDatas.size());
-                    lv_data_list.setAdapter(workDataAdapter);
-                } else {
-                    periodListDatas.addAll(response.body().getContent().getList());
-                    workDataAdapter.notifyDataSetChanged();
-                }
+//
+//                    Print.e(TAG+ "_____________________",periodListDatas.size());
+//                    lv_data_list.setAdapter(workDataAdapter);
+//                } else {
+//                    periodListDatas.addAll(response.body().getContent().getList());
+//                    workDataAdapter.notifyDataSetChanged();
+//                }
             }
 
             @Override
@@ -442,10 +456,11 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
 
                 tv_state.setText("状态");
                 sectionState = null;
+                state = null;
                 page = 1;
-                periodListDatas.clear();
+                moneyDatas.clear();
                 tvFooter.setText("滑动加载数据");
-                getDataFromServer(1, segmentId, num, sectionState);
+                getDataFromServer(sectionName, state);
                 popupWindow.dismiss();
             }
         });
@@ -486,7 +501,8 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                     selectId = "2";
                 }
                 sectionState = selectId;
-                getDataFromServer(1, segmentId, num, sectionState);
+                state = Integer.parseInt(selectId) - 1;
+                getDataFromServer(sectionName, state);
 
                 Print.e(TAG + "_sectionId", segmentId);
                 Print.e(TAG + "num", num);
@@ -587,9 +603,9 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 segmentId = "";
                 page = 1;
 
-                periodListDatas.clear();
+                moneyDatas.clear();
                 tvFooter.setText("滑动加载数据");
-                getDataFromServer(1, segmentId, num, sectionState);
+                getDataFromServer(sectionName, state);
                 popupWindow.dismiss();
             }
         });
@@ -608,7 +624,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 }
 
                 segmentId = String.valueOf(sectionId);
-                getDataFromServer(1, segmentId, num, sectionState);
+                getDataFromServer(sectionName, state);
                 Print.e(TAG + "_sectionId", segmentId);
                 Print.e(TAG + "num", num);
                 Print.e(TAG + "sectionState", sectionState);
@@ -691,6 +707,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 sectionData.setSelect(true);
                 selectSection = String.valueOf(sectionData.getName());
                 sectionId = sectionData.getId();
+                sectionName = sectionData.getName();
 
             }
 
@@ -785,16 +802,16 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 selectProject = "";
 
 //                if (mAdapter != null) {
-                    timeAdapter.notifyDataSetChanged();
+                timeAdapter.notifyDataSetChanged();
 //                }
 
                 isClickConfirm_project = false;
                 num = "";
                 page = 1;
 
-                periodListDatas.clear();
+                moneyDatas.clear();
                 tvFooter.setText("滑动加载数据");
-                getDataFromServer(1, segmentId, num, sectionState);
+                getDataFromServer(sectionName, state);
                 popupWindow.dismiss();
             }
         });
@@ -813,13 +830,13 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 }
 
                 Print.e("sss", selectProject);
-                if(selectProject.isEmpty()){
+                if (selectProject.isEmpty()) {
                     num = "";
-                }else{
+                } else {
                     num = selectProject.substring(0, 1);
                 }
 
-                getDataFromServer(1, segmentId, num, sectionState);
+                getDataFromServer(sectionName, state);
             }
         });
 
@@ -909,14 +926,15 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
 
 
     private class WorkDataAdapter extends BaseAdapter {
-        private List<PeriodListData.ListBean> periodListDatas ;
+        private List<MoneyData> moneyDatas;
 
-        public WorkDataAdapter(List<PeriodListData.ListBean> _periodListDatas){
-            periodListDatas = _periodListDatas;
+        public WorkDataAdapter(List<MoneyData> _moneyDatas) {
+            moneyDatas = _moneyDatas;
         }
+
         @Override
         public int getCount() {
-            return periodListDatas.size();
+            return moneyDatas.size();
         }
 
         @Override
@@ -945,30 +963,22 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.tv_number.setText(position + 1 + "");
-            holder.tv_title.setText(periodListDatas.get(position).getTitle());
-            if (periodListDatas.get(position).getSignState().equals("0")) {
-                holder.tv_state.setText("未审核");
-                holder.tv_state.setTextColor(getResources().getColor(R.color.workState));
-                holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_two));
-            } else if (periodListDatas.get(position).getSignState().equals("1")) {
-                holder.tv_state.setText("待我审核");
+            holder.tv_title.setText(moneyDatas.get(position).getTitle());
+            if (moneyDatas.get(position).getState() == 0) {
+                holder.tv_state.setText("待审核");
                 holder.tv_state.setTextColor(getResources().getColor(R.color.colorTitle));
                 holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_three));
-            } else if (periodListDatas.get(position).getSignState().equals("2")) {
+            } else if (moneyDatas.get(position).getState() == 1) {
                 holder.tv_state.setText("已审核");
                 holder.tv_state.setTextColor(getResources().getColor(R.color.workStateRight));
                 holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_four));
-            }else if (periodListDatas.get(position).getSignState().equals("-1")) {
-                holder.tv_state.setText("待审核");
-                holder.tv_state.setTextColor(getResources().getColor(R.color.workState));
-                holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_two));
-            }else {
+            } else {
                 holder.tv_state.setText("未审核");
                 holder.tv_state.setTextColor(getResources().getColor(R.color.workState));
                 holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_two));
             }
 
-            holder.tv_time.setText(periodListDatas.get(position).getStartTime().substring(0, 10));
+            holder.tv_time.setText(moneyDatas.get(position).getCreatetime().substring(0, 10));
 
 
             return convertView;

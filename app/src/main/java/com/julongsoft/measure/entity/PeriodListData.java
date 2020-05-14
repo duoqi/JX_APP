@@ -76,13 +76,13 @@ public class PeriodListData {
         private int num;
         private String startTime;
         private String state;
-        private String signState;
+        private int signState;
 
-        public String getSignState() {
+        public int getSignState() {
             return signState;
         }
 
-        public void setSignState(String signState) {
+        public void setSignState(int signState) {
             this.signState = signState;
         }
 

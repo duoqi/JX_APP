@@ -44,6 +44,7 @@
         <!--</service>-->
 
         <activity
+            tools:ignore="LockedOrientationActivity"
             android:name=".activity.LauncherActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -54,34 +55,45 @@
         </activity>
 
         <activity
+            tools:ignore="LockedOrientationActivity"
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
 
         <activity
+            tools:ignore="LockedOrientationActivity"
             android:name=".activity.LoginActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="portrait"
             />
 
         <activity
+            tools:ignore="LockedOrientationActivity"
             android:name=".activity.UpdataPasswordActivity"
             android:screenOrientation="portrait"
             />
 
         <activity
+            tools:ignore="LockedOrientationActivity"
             android:name=".activity.WaitAuditActivity"
             android:screenOrientation="portrait"
             />
 
         <activity
+            tools:ignore="LockedOrientationActivity"
             android:name=".activity.RepulseActivity"
             android:screenOrientation="portrait"
             />
 
         <activity
             android:name=".activity.WaitDetialActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            tools:ignore="LockedOrientationActivity"
+            android:name=".activity.MoneyDetialActivity"
             android:screenOrientation="portrait"
             />
 

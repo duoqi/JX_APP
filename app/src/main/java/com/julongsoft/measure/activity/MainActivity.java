@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public enum TabTag {
-        Home, backlog, about
+        Home, backlog, money,about
     }
 
     public void setCurTab(TabTag tag) {
@@ -134,9 +134,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setCurTab(TabTag.backlog);
                 _fragmentList.get(1).onSelected();
                 break;
-            case R.id.main_tab3_layout:
-                setCurTab(TabTag.about);
+            case R.id.main_tab4_layout:
+                setCurTab(TabTag.money);
                 _fragmentList.get(2).onSelected();
+                break;
+                case R.id.main_tab3_layout:
+                setCurTab(TabTag.about);
+                _fragmentList.get(3).onSelected();
                 break;
             default:
                 break;

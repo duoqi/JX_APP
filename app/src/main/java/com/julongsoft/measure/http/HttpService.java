@@ -2,13 +2,19 @@ package com.julongsoft.measure.http;
 
 
 import com.julongsoft.measure.entity.HomeDataBean;
+import com.julongsoft.measure.entity.MoneyData;
+import com.julongsoft.measure.entity.MoneyDetialData;
+import com.julongsoft.measure.entity.MoneySignListData;
 import com.julongsoft.measure.entity.PeriodListData;
 import com.julongsoft.measure.entity.SectionDetial;
 import com.julongsoft.measure.entity.UserData;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -23,7 +29,8 @@ public interface HttpService {
 //      public static final String baseUrl = "http://192.168.7.150:8082/plat/";
 //    public static final String baseUrl = "http://60.8.218.156:7000/plat/"; //正式
 //    public static final String baseUrl = "http://60.8.218.156:7001/plat_xa_app/"; //正式
-    public static final String baseUrl = "http://27.128.206.151:7001/plat_xa_app/"; //正式
+//    public static final String baseUrl = "http://27.128.206.151:7001/plat_xa_app/"; //正式
+    public static final String baseUrl = "http://27.128.206.151:7002/plat_xa_app/"; //正式
 //    public static final String baseUrl = "http://192.168.7.104:8083/plat/"; //测试
 //    public static final String baseUrl = "http://60.8.218.142:8089/plat/"; //测试
 
@@ -67,6 +74,33 @@ public interface HttpService {
                                                          @Query("segmentId") String segmentId,
                                                          @Query("num") String num,
                                                          @Query("signState") String state
+    );
+
+    /***
+     * 资金列表接口
+     * @return
+     */
+    @POST("a/app/zjsj/list/{token}")
+    Call<BaseResultData<List<MoneyData>>> getMoneyListData(@Path("token") String token,
+                                                     @Body RequestBody requestBody
+    );
+
+    /***
+     * 资金明细签字列表接口
+     * @return
+     */
+    @GET("a/app/zjsj/signList/{token}")
+    Call<BaseResultData<List<MoneySignListData>>> getMoneySignListData(@Path("token") String token,
+                                                                       @Query("note") String note
+    );
+
+    /***
+     * 资金详情列表接口
+     * @return
+     */
+    @GET("a/app/zjsj/sum/{token}")
+    Call<BaseResultData<MoneyDetialData>> getMoneySumData(@Path("token") String token,
+                                                          @Query("note") String note
     );
 
 

@@ -40,7 +40,7 @@ public class SectionDetial implements Serializable{
     private String title;
     private String numCode;
     private int sgn;
-    private int pactSumTotal;
+    private double pactSumTotal;
     private String contractor;
     private List<SignDataBean> signData;
     private List<AppSumChptBean> appSumChpt;
@@ -134,11 +134,11 @@ public class SectionDetial implements Serializable{
         this.sgn = sgn;
     }
 
-    public int getPactSumTotal() {
+    public double getPactSumTotal() {
         return pactSumTotal;
     }
 
-    public void setPactSumTotal(int pactSumTotal) {
+    public void setPactSumTotal(double pactSumTotal) {
         this.pactSumTotal = pactSumTotal;
     }
 

@@ -282,7 +282,7 @@ public class WorkFragment extends BaseFragment implements PopupWindowWork.OnClic
 
             @Override
             public void onFail(String message) {
-                mActivity.showToastMessage(message);
+//                mActivity.showToastMessage(message);
                 Print.e(TAG, message);
             }
         });
@@ -951,19 +951,19 @@ public class WorkFragment extends BaseFragment implements PopupWindowWork.OnClic
             }
             holder.tv_number.setText(position + 1 + "");
             holder.tv_title.setText(periodListDatas.get(position).getTitle());
-            if (periodListDatas.get(position).getSignState().equals("0")) {
+            if (periodListDatas.get(position).getSignState() == 0) {
                 holder.tv_state.setText("未审核");
                 holder.tv_state.setTextColor(getResources().getColor(R.color.workState));
                 holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_two));
-            } else if (periodListDatas.get(position).getSignState().equals("1")) {
+            } else if (periodListDatas.get(position).getSignState() == 1) {
                 holder.tv_state.setText("待我审核");
                 holder.tv_state.setTextColor(getResources().getColor(R.color.colorTitle));
                 holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_three));
-            } else if (periodListDatas.get(position).getSignState().equals("2")) {
+            } else if (periodListDatas.get(position).getSignState() == 2) {
                 holder.tv_state.setText("已审核");
                 holder.tv_state.setTextColor(getResources().getColor(R.color.workStateRight));
                 holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_four));
-            }else if (periodListDatas.get(position).getSignState().equals("-1")) {
+            }else if (periodListDatas.get(position).getSignState() == -1) {
                 holder.tv_state.setText("待审核");
                 holder.tv_state.setTextColor(getResources().getColor(R.color.workState));
                 holder.rlNumber.setBackground(getResources().getDrawable(R.drawable.shape_work_number_two));
