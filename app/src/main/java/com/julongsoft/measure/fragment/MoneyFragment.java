@@ -465,7 +465,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 state = null;
                 page = 1;
                 moneyDatas.clear();
-                tvFooter.setText("滑动加载数据");
+//                tvFooter.setText("滑动加载数据");
                 getDataFromServer(sectionName, state);
                 popupWindow.dismiss();
             }
@@ -610,7 +610,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 page = 1;
 
                 moneyDatas.clear();
-                tvFooter.setText("滑动加载数据");
+//                tvFooter.setText("滑动加载数据");
                 getDataFromServer(sectionName, state);
                 popupWindow.dismiss();
             }
@@ -816,7 +816,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 page = 1;
 
                 moneyDatas.clear();
-                tvFooter.setText("滑动加载数据");
+//                tvFooter.setText("滑动加载数据");
                 getDataFromServer(sectionName, state);
                 popupWindow.dismiss();
             }
