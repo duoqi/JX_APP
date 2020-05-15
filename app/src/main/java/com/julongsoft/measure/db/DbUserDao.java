@@ -36,6 +36,7 @@ public class DbUserDao extends AbstractDao<DbUser, Long> {
         public final static Property OrgId = new Property(9, Integer.class, "orgId", false, "ORG_ID");
         public final static Property OrgName = new Property(10, String.class, "orgName", false, "ORG_NAME");
         public final static Property MaxPeroid = new Property(11, Integer.class, "maxPeroid", false, "MAX_PEROID");
+        public final static Property Roles = new Property(12, String.class, "roles", false, "ROLES");
     }
 
 
@@ -62,7 +63,8 @@ public class DbUserDao extends AbstractDao<DbUser, Long> {
                 "\"TEL\" TEXT," + // 8: tel
                 "\"ORG_ID\" INTEGER," + // 9: orgId
                 "\"ORG_NAME\" TEXT," + // 10: orgName
-                "\"MAX_PEROID\" INTEGER);"); // 11: maxPeroid
+                "\"MAX_PEROID\" INTEGER," + // 11: maxPeroid
+                "\"ROLES\" TEXT);"); // 12: roles
     }
 
     /** Drops the underlying database table. */
@@ -134,6 +136,11 @@ public class DbUserDao extends AbstractDao<DbUser, Long> {
         if (maxPeroid != null) {
             stmt.bindLong(12, maxPeroid);
         }
+ 
+        String roles = entity.getRoles();
+        if (roles != null) {
+            stmt.bindString(13, roles);
+        }
     }
 
     @Override
@@ -199,6 +206,11 @@ public class DbUserDao extends AbstractDao<DbUser, Long> {
         if (maxPeroid != null) {
             stmt.bindLong(12, maxPeroid);
         }
+ 
+        String roles = entity.getRoles();
+        if (roles != null) {
+            stmt.bindString(13, roles);
+        }
     }
 
     @Override
@@ -220,7 +232,8 @@ public class DbUserDao extends AbstractDao<DbUser, Long> {
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // tel
             cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // orgId
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // orgName
-            cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11) // maxPeroid
+            cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // maxPeroid
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12) // roles
         );
         return entity;
     }
@@ -239,6 +252,7 @@ public class DbUserDao extends AbstractDao<DbUser, Long> {
         entity.setOrgId(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
         entity.setOrgName(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setMaxPeroid(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
+        entity.setRoles(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
      }
     
     @Override

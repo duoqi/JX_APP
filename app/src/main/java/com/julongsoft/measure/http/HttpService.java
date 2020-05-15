@@ -14,6 +14,8 @@ import java.util.List;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -82,7 +84,7 @@ public interface HttpService {
      */
     @POST("a/app/zjsj/list/{token}")
     Call<BaseResultData<List<MoneyData>>> getMoneyListData(@Path("token") String token,
-                                                     @Body RequestBody requestBody
+                                                           @Body RequestBody requestBody
     );
 
     /***
@@ -128,10 +130,10 @@ public interface HttpService {
      */
     @POST("a/app/jlzf/period/sign/{token}/{periodId}/{id}")
     Call<BaseResultData<Boolean>> sign(@Path("token") String token,
-                                                  @Path("periodId") int periodId,
-                                                  @Path("id") int id,
-                                                  @Query("idea") String idea,
-                                                  @Query("repeal") int repeal
+                                       @Path("periodId") int periodId,
+                                       @Path("id") int id,
+                                       @Query("idea") String idea,
+                                       @Query("repeal") int repeal
     );
 
     /***
@@ -140,5 +142,14 @@ public interface HttpService {
      */
     @POST("a/app/jlzf/period/signResult/{token}")
     Call<BaseResultData<List<HomeDataBean>>> signResult(@Path("token") String token
+    );
+
+    /***
+     * 资金签字
+     * @return
+     */
+    @POST("a/app/zjsj/sign/{token}/{id}")
+    @FormUrlEncoded
+    Call<BaseResultData> signResult(@Path("token") String token, @Path("id") int id, @Field("repeal") int repeal,@Field("idea") String idea
     );
 }

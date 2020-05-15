@@ -149,14 +149,14 @@ public class LoginActivity extends BaseActivity {
                     Print.e("33", "22");
                     final List<DbUserName> userNameList = GreenDaoHelper.getInstance().getSession().getDbUserNameDao().queryBuilder().list();
                     if (null != userNameList || userNameList.size() > 0) {
-                        View popupView = View.inflate(LoginActivity.this,R.layout.popu_login_username,null);
+                        View popupView = View.inflate(LoginActivity.this, R.layout.popu_login_username, null);
                         final PopupWindow popupWindow = new PopupWindow(popupView, mUser.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT, true);
                         popupWindow.setBackgroundDrawable(new BitmapDrawable());
                         popupWindow.setOutsideTouchable(true);
                         // 设置此参数获得焦点，否则无法点击
                         popupWindow.setFocusable(false);
                         popupWindow.setTouchable(true);
-                        ListView listView = (ListView)popupView.findViewById(R.id.lv_login_username);
+                        ListView listView = (ListView) popupView.findViewById(R.id.lv_login_username);
                         listView.setAdapter(new BaseAdapter() {
                             @Override
                             public int getCount() {
@@ -176,8 +176,8 @@ public class LoginActivity extends BaseActivity {
 
                             @Override
                             public View getView(int position, View convertView, ViewGroup parent) {
-                                View view = View.inflate(LoginActivity.this,R.layout.item_login_username,null);
-                                TextView tv_text = (TextView)view.findViewById(R.id.tv_text);
+                                View view = View.inflate(LoginActivity.this, R.layout.item_login_username, null);
+                                TextView tv_text = (TextView) view.findViewById(R.id.tv_text);
                                 tv_text.setText(userNameList.get(position).getUsername());
                                 return view;
                             }
@@ -214,9 +214,10 @@ public class LoginActivity extends BaseActivity {
         Integer orgId = userData.getContent().getOrgId();
         String orgName = userData.getContent().getOrgName();
         Integer maxPeroid = userData.getContent().getMaxPeroid();
+        String roles = userData.getContent().getRoles();
         DbUser dbUser = new DbUser(token, deadline, id, code,
                 name, password, isDeleted, notes,
-                tel, orgId, orgName, maxPeroid);
+                tel, orgId, orgName, maxPeroid, roles);
         GreenDaoHelper.getInstance().getSession().getDbUserDao().insertOrReplace(dbUser);
 
 

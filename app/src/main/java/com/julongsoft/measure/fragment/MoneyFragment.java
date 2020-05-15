@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -162,9 +161,9 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
         lv_data_list = (ListView) view.findViewById(R.id.lv_data_list);
 
 
-        View footerView = View.inflate(mActivity, R.layout.item_add_footer_view, null);
-        tvFooter = (TextView) footerView.findViewById(R.id.tv_footer);
-        lv_data_list.addFooterView(footerView, null, false);
+//        View footerView = View.inflate(mActivity, R.layout.item_add_footer_view, null);
+//        tvFooter = (TextView) footerView.findViewById(R.id.tv_footer);
+//        lv_data_list.addFooterView(footerView, null, false);
 
 
         lv_data_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -173,8 +172,8 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 MoneyData moneyData = moneyDatas.get(position);
                 Intent intent = new Intent(mActivity, MoneyDetialActivity.class);
                 intent.putExtra("note", moneyData.getNote());
-                Print.e("note",moneyData.getNote());
-                startActivity(intent);
+                Print.e("note", moneyData.getNote());
+                startActivityForResult(intent, 200);
             }
         });
 
@@ -192,6 +191,8 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
         rl_state.setOnClickListener(this);
         rl_time.setOnClickListener(this);
         rl_section.setOnClickListener(this);
+
+        rl_section.setVisibility(View.GONE);
 
 
         for (int i = 0; i < segments.size(); i++) {
@@ -245,9 +246,14 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
 //        });
 
 
-        getDataFromServer(sectionName, state);
+//        getDataFromServer(sectionName, state);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer(sectionName, state);
+    }
 
     /***
      * peroid peroid

@@ -43,10 +43,11 @@ public class DbUser {
     public Integer orgId;
     public String orgName;
     public Integer maxPeroid;
-    @Generated(hash = 100173648)
+    public String roles;
+    @Generated(hash = 710968092)
     public DbUser(String token, String deadline, Long id, String code, String name,
             String password, Integer isDeleted, String notes, String tel,
-            Integer orgId, String orgName, Integer maxPeroid) {
+            Integer orgId, String orgName, Integer maxPeroid, String roles) {
         this.token = token;
         this.deadline = deadline;
         this.id = id;
@@ -59,6 +60,7 @@ public class DbUser {
         this.orgId = orgId;
         this.orgName = orgName;
         this.maxPeroid = maxPeroid;
+        this.roles = roles;
     }
     @Generated(hash = 762027100)
     public DbUser() {
@@ -134,6 +136,12 @@ public class DbUser {
     }
     public void setMaxPeroid(Integer maxPeroid) {
         this.maxPeroid = maxPeroid;
+    }
+    public String getRoles() {
+        return this.roles;
+    }
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
 

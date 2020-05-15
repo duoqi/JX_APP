@@ -37,6 +37,7 @@ public class UserData {
     private int orgId;
     private String orgName;
     private int maxPeroid;
+    private String roles;
     private List<SegmentsBean> segments;
 
     public String getToken() {
@@ -141,6 +142,14 @@ public class UserData {
 
     public void setSegments(List<SegmentsBean> segments) {
         this.segments = segments;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public static class SegmentsBean {

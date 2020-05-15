@@ -1,5 +1,6 @@
 package com.julongsoft.measure.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,11 +56,11 @@ public class MoneyDetialActivity extends BaseActivity implements View.OnClickLis
     private TextView tv_hetong_pay;
     private TextView tv_last_pay;
     private TextView tv_this_pay;
-    private TextView tv_this_totle_pay,tv_text1,tv_text2,tv_text3,tv_text4;
+    private TextView tv_this_totle_pay, tv_text1, tv_text2, tv_text3, tv_text4;
     private NoScrollAdapter mAdapter;
 
 
-    private SectionDetial sectionDetial ;
+    private SectionDetial sectionDetial;
 
     private List<MoneySignListData> list = new ArrayList<>();
     private List<MoneySignListData> list_another = new ArrayList<>();
@@ -125,6 +126,7 @@ public class MoneyDetialActivity extends BaseActivity implements View.OnClickLis
         HttpManager.getInstance().getHttpService().getMoneySumData(user.getToken(), note).enqueue(new HttpResultCallback<BaseResultData<MoneyDetialData>>() {
 
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onSuc(Response<BaseResultData<MoneyDetialData>> response) {
                 hideProgressDialog();
@@ -135,12 +137,12 @@ public class MoneyDetialActivity extends BaseActivity implements View.OnClickLis
                 tv_text4.setText("累计实际支付");
                 tv_unit_name.setText(response.body().getContent().getContractor());
                 try {
-                    tv_hetong_pay.setText(Double.valueOf(response.body().getContent().getTotal_ivst()) + "");
-                    tv_last_pay.setText(Double.valueOf(response.body().getContent().getPlan_ivst())  + "");
-                    tv_this_pay.setText(Double.valueOf(response.body().getContent().getApproval_ivst()) + "");
-                    tv_this_totle_pay.setText(Double.valueOf(response.body().getContent().getPeriod_pay_money())  + "");
-                }catch (Exception e){
-                    Print.e(TAG,"数据转换异常");
+                    tv_hetong_pay.setText((double) response.body().getContent().getTotal_ivst() + "元");
+                    tv_last_pay.setText((double) response.body().getContent().getPlan_ivst() + "元");
+                    tv_this_pay.setText((double) response.body().getContent().getApproval_ivst() + "元");
+                    tv_this_totle_pay.setText((double) response.body().getContent().getPeriod_pay_money() + "元");
+                } catch (Exception e) {
+                    Print.e(TAG, "数据转换异常");
                 }
 
             }
@@ -161,8 +163,9 @@ public class MoneyDetialActivity extends BaseActivity implements View.OnClickLis
                 hideProgressDialog();
                 msv_scroll_view.setVisibility(View.VISIBLE);
                 list = response.body().getContent();
+                list_boolean.clear();
                 for (int i = 0; i < response.body().content.size(); i++) {
-                    if (list.get(i).getState() == 1) {
+                    if (list.get(i).getState() == 1 && user.getRoles().contains(list.get(i).getRole_id() + "")) {
                         list_boolean.add(response.body().content.get(i));
                     }
                 }
@@ -172,7 +175,7 @@ public class MoneyDetialActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     rl_layout.setVisibility(View.GONE);
                 }
-                list_boolean.clear();
+//                list_boolean.clear();
                 mAdapter = new NoScrollAdapter();
                 no_scroll_listview.setAdapter(mAdapter);
             }
@@ -209,7 +212,7 @@ public class MoneyDetialActivity extends BaseActivity implements View.OnClickLis
             case R.id.tv_detial:
             case R.id.tv_image1:
                 Intent intent = new Intent(MoneyDetialActivity.this, WaitDetialActivity.class);
-                intent.putExtra("sectionDetial",sectionDetial);
+                intent.putExtra("sectionDetial", sectionDetial);
                 startActivity(intent);
 
                 break;
@@ -222,59 +225,57 @@ public class MoneyDetialActivity extends BaseActivity implements View.OnClickLis
 //                    }
 //                }
 //
-//                Print.e(TAG + "list_another.size", list_another.size());
-//                if (list_another.size() > 0) {
-//                    WindowManager m = getWindowManager();
-//                    Display d = m.getDefaultDisplay();
-//                    final AlertDialog dialog = new AlertDialog.Builder(this).create();
-//                    dialog.show();
-//                    Window window = dialog.getWindow();
-//                    WindowManager.LayoutParams lp = window.getAttributes();
-//                    lp.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
-//                    window.setAttributes(lp);
-//                    window.setContentView(R.layout.dialog_wait_audit_pass);
-//                    Button btn_right = (Button) window.findViewById(R.id.btn_right);
-//                    Button btn_cancle = (Button) window.findViewById(R.id.btn_cancle);
-//                    btn_right.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//                    btn_cancle.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
+                Print.e(TAG + "list_another.size", list_another.size());
+                if (list_boolean.size() > 0) {
+                    WindowManager m = getWindowManager();
+                    Display d = m.getDefaultDisplay();
+                    final AlertDialog dialog = new AlertDialog.Builder(this).create();
+                    dialog.show();
+                    Window window = dialog.getWindow();
+                    WindowManager.LayoutParams lp = window.getAttributes();
+                    lp.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
+                    window.setAttributes(lp);
+                    window.setContentView(R.layout.dialog_wait_audit_pass);
+                    Button btn_right = (Button) window.findViewById(R.id.btn_right);
+                    Button btn_cancle = (Button) window.findViewById(R.id.btn_cancle);
+                    btn_right.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    btn_cancle.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 //                            for (int i = 0; i < list_another.size(); i++) {
-//
-////                                @Path("token") String token,
-////                                @Path("id") String id,
-////                                @Path("id") int periodId,
-////                                @Query("idea") String idea,
-////                                @Query("repeal") int repeal
-//
-//                                MoneyDetialData signDataBean = list_another.get(i);
-//                                Print.e(TAG + "333", signDataBean.getId());
-////                                HttpManager.getInstance().getHttpService().sign(user.getToken(), periodId, signDataBean.getId(), "", 0).enqueue(new HttpResultCallback<BaseResultData<Boolean>>() {
-////                                    @Override
-////                                    public void onSuc(Response<BaseResultData<Boolean>> response) {
-////                                        showToastMessage("已通过");
-////                                        getDataFromServer();
-////                                    }
-////
-////                                    @Override
-////                                    public void onFail(String message) {
-////                                        showToastMessage(message);
-////                                    }
-////                                });
+
+                            showProgressDialog("请稍后");
+                            MoneySignListData signDataBean = list_boolean.get(0);
+                            Print.e(TAG + "333", signDataBean.getId());
+                            HttpManager.getInstance().getHttpService().signResult(user.getToken(), signDataBean.getId(), 1,"同意").enqueue(new HttpResultCallback<BaseResultData>() {
+                                @Override
+                                public void onSuc(Response<BaseResultData> response) {
+                                    showToastMessage("已通过");
+                                    getDataFromServer();
+                                    hideProgressDialog();
+                                }
+
+                                @Override
+                                public void onFail(String message) {
+                                    showToastMessage(message);
+                                    Print.e(TAG, message);
+                                    hideProgressDialog();
+                                }
+                            });
 //                            }
-//
-//
-//                            dialog.dismiss();
-//                        }
-//                    });
-//                } else {
-//                    showToastMessage("不能签字！");
-//                }
+
+
+                            dialog.dismiss();
+                        }
+                    });
+                } else {
+                    showToastMessage("不能签字！");
+                }
 
 
                 break;
@@ -313,8 +314,15 @@ public class MoneyDetialActivity extends BaseActivity implements View.OnClickLis
                 view2.setVisibility(View.GONE);
             }
             MoneySignListData signDataBean = list.get(position);
-            tv_unit.setText(signDataBean.getPeriod_id() + "");
-            tv_state.setText(signDataBean.getSgn_id() + "");
+            tv_unit.setText(signDataBean.getRole_name());
+            if (signDataBean.getState() == 1) {
+                tv_state.setText("待审核");
+            } else if (signDataBean.getState() == 0) {
+                tv_state.setText("未审核");
+            } else if (signDataBean.getState() == 2) {
+                tv_state.setText("已审核");
+            }
+
 //            if (null != signDataBean.getTime()) {
 //                tv_time.setText(signDataBean.getTime().substring(0, 10));
 //            }
