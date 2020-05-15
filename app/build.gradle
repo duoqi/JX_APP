@@ -24,9 +24,6 @@ android {
         ]
     }
 
-
-
-
     buildTypes {
         release {
             minifyEnabled false
@@ -42,20 +39,6 @@ android {
         daoPackage 'com.julongsoft.measure.db'
     }
 
-    signingConfigs {
-        debug {
-            storeFile file('../keystore/yxtkeystore.jks')
-            storePassword 'd2399562'
-            keyAlias = 'yxt1'
-            keyPassword 'd2399563'
-        }
-        release {
-            storeFile file('../keystore/yxtkeystore.jks')
-            storePassword 'd2399562'
-            keyAlias = 'yxt1'
-            keyPassword 'd2399563'
-        }
-    }
 }
 
 dependencies {
