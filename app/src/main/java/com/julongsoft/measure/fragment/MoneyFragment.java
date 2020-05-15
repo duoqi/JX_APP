@@ -252,7 +252,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
     @Override
     public void onResume() {
         super.onResume();
-        getDataFromServer(sectionName, state);
+        getDataFromServer(sectionId, state);
     }
 
     /***
@@ -261,7 +261,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
      * 工期id id
      */
 
-    public void getDataFromServer(String segmentName, Integer state) {
+    public void getDataFromServer(long segmentName, Integer state) {
         String json = null;
         try {
             json = new JSONObject().put("segmentName", segmentName).put("state", state).toString();
@@ -466,7 +466,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 page = 1;
                 moneyDatas.clear();
 //                tvFooter.setText("滑动加载数据");
-                getDataFromServer(sectionName, state);
+                getDataFromServer(sectionId, state);
                 popupWindow.dismiss();
             }
         });
@@ -508,7 +508,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 }
                 sectionState = selectId;
                 state = Integer.parseInt(selectId) - 1;
-                getDataFromServer(sectionName, state);
+                getDataFromServer(sectionId, state);
 
                 Print.e(TAG + "_sectionId", segmentId);
                 Print.e(TAG + "num", num);
@@ -611,7 +611,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
 
                 moneyDatas.clear();
 //                tvFooter.setText("滑动加载数据");
-                getDataFromServer(sectionName, state);
+                getDataFromServer(sectionId, state);
                 popupWindow.dismiss();
             }
         });
@@ -630,7 +630,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 }
 
                 segmentId = String.valueOf(sectionId);
-                getDataFromServer(sectionName, state);
+                getDataFromServer(sectionId, state);
                 Print.e(TAG + "_sectionId", segmentId);
                 Print.e(TAG + "num", num);
                 Print.e(TAG + "sectionState", sectionState);
@@ -817,7 +817,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
 
                 moneyDatas.clear();
 //                tvFooter.setText("滑动加载数据");
-                getDataFromServer(sectionName, state);
+                getDataFromServer(sectionId, state);
                 popupWindow.dismiss();
             }
         });
@@ -842,7 +842,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                     num = selectProject.substring(0, 1);
                 }
 
-                getDataFromServer(sectionName, state);
+                getDataFromServer(sectionId, state);
             }
         });
 
