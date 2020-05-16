@@ -264,7 +264,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
     public void getDataFromServer(long segmentName, Integer state) {
         String json = null;
         try {
-            json = new JSONObject().put("segmentName", segmentName).put("state", state).toString();
+            json = new JSONObject().put("segmentName", segmentName).put("signState", state).toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -284,6 +284,7 @@ public class MoneyFragment extends BaseFragment implements PopupWindowWork.OnCli
                 if (response.body().code == 0) {
                     moneyDatas = response.body().getContent();
                     lv_data_list.setAdapter(new WorkDataAdapter(moneyDatas));
+                    Print.e(TAG+"--------------",moneyDatas.size());
                 }
 
 //
